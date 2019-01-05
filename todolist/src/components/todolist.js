@@ -1,47 +1,35 @@
 import React, { Component } from 'react';
 import AddItem from './addItem';
 import Todoitem from './todoitem';
-
+import { connect } from 'react-redux';
 
 class ToDoList extends Component {
-    constructor(){
-        super();
-        this.state = {
-            todos: ['wash up', 'eat some cheese', 'take a nap']
-        }
-        this.onDelete = this.onDelete.bind(this);
-        this.onAdd = this.onAdd.bind(this);
-        
-    }
+    // onDelete = (item) => {
+    //     const updatedTodos = this.state.todos.filter((val, index) => {
+    //         return item !== val;
+    //     });
+    //     this.setState({
+    //         todos: updatedTodos
+    //     });
+    //     console.log(this.state)
+    // }
 
-    onDelete(item){
-        const updatedTodos = this.state.todos.filter((val, index) => {
-            return item !== val;
-        });
-        this.setState({
-            todos: updatedTodos
-        });
-        console.log(this.state)
-    }
-
-    onAdd(item){
-        console.log(item)
-        const updatedTodos = this.state.todos;
-        updatedTodos.push(item);
-        this.setState({
-            todos : updatedTodos
-        })
-    }
+    // onAdd = (item) => {
+    //     console.log(item)
+    //     const updatedTodos = this.state.todos;
+    //     updatedTodos.push(item);
+    //     this.setState({
+    //         todos : updatedTodos
+    //     })
+    // }
 
 
   render() {
-    const todos = this.state.todos.map((item, index) =>  {
+    const todos = this.props.posts.map(post => {
         return (
-            <Todoitem key={index} item={item} onDelete={this.onDelete} />
+            <Todoitem title={post.title} body={post.body} key={post.id}/>
         )
-
-    });
-
+    })
 
     return (
         <div>
@@ -51,4 +39,11 @@ class ToDoList extends Component {
     )
   }
 }
-export default ToDoList;
+
+const mapStateToProps = (state) => {
+    return {
+        posts: state.todos
+    }
+}
+
+export default connect(mapStateToProps)(ToDoList)
