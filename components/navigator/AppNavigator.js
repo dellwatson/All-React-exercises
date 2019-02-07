@@ -1,5 +1,4 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import AuthStack from './AuthStack'
 import AppDrawer from './MainNav'
 import AuthScreen from '../auth/AuthScreen'
 import LoginScreen from '../auth/LoginScreen'
@@ -10,14 +9,12 @@ const OpeningScreen = createSwitchNavigator(
         AuthLoading: AuthScreen,
         Login: LoginScreen,
         SignUp: SignUpScreen,
-        // Auth: AuthStack,
         App: AppDrawer
     },
     {
-        initialRouteName: 'AuthLoading',
-        
+        initialRouteName: 'App',
+
     }
 );
 
 export default createAppContainer(OpeningScreen);
-

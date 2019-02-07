@@ -8,7 +8,7 @@ export default class EditProfile extends Component {
   render() {
     return (
       <View  style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text> Edit Profile </Text>
+        <Text> Edit Profile coy </Text>
       </View>
     )
   }

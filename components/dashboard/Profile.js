@@ -1,19 +1,30 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Button } from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
 
-export default class Profile extends Component {
-    static navigationOptions = {
-        title: 'Profile'
+ class Profile extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+        title: 'ProfileX',
+        headerLeft: (
+            <Ionicons
+                name="md-menu"
+                onPress={()=> navigation.openDrawer()}
+                size={30}
+                style={{ paddingLeft: 10 }}
+            />
+        )
     }
+}
   render() {
     return (
       <View style={styles.container}>
         <Text> Profile </Text>
-        <Button 
+        <Button
             style={{
                 flex:1, paddingBottom:20
             }}
-            title="Edit Profile" 
+            title="Edit Profile"
             onPress={()=>{this.props.navigation.navigate("EditProfile")}}
             />
       </View>
@@ -29,3 +40,5 @@ const styles = StyleSheet.create({
       justifyContent: 'center'
     },
   });
+
+  export default Profile;
