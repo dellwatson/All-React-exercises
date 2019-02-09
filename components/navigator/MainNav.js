@@ -1,5 +1,6 @@
 import React from 'react';
 import Profile from '../dashboard/Profile'
+import Search from '../dashboard/Search'
 import EditProfile from '../Profile/EditProfile'
 import Settings from '../dashboard/Settings'
 import Dashboard from '../dashboard/Dashboard';
@@ -62,10 +63,27 @@ const SettingStack = createStackNavigator(
     }
 )
 
+//Search
+const SearchStack = createStackNavigator(
+    {
+        Search 
+    },
+    {
+        navigationOptions: {
+            tabBarIcon: ({ focused }) => (
+                <Ionicons 
+                    size={26}
+                    name='md-search' />
+            )
+        }
+    }
+)
+
 //Tabs
 const AppTabs = createBottomTabNavigator(
     {
         DashboardStack,
+        SearchStack,
         ProfileStack,
         SettingStack
     },

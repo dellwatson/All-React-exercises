@@ -1,21 +1,14 @@
 import React, { Component } from 'react'
 import { Text, View, ActivityIndicator, StyleSheet, Image, FlatList } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
+import SearchBar from './SearchBar'
 import { connect } from 'react-redux';
 
 
-class Dashboard extends Component {
+class Search extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-        title: 'Home',
-        headerLeft: (
-          <Ionicons
-              name="md-menu"
-              onPress={()=> navigation.openDrawer()}
-              size={30}
-              style={{ paddingLeft: 10 }}
-          />
-        ),
+        header: <SearchBar />
     }
   }
 
@@ -32,23 +25,25 @@ class Dashboard extends Component {
   }
 
   getData = async () => {
-    const url= 'https://jsonplaceholder.typicode.com/photos?_limit=10&_page='+this.state.page;
+    const info = this.props.query
+    const url= `http://api.giphy.com/v1/gifs/search?q=${info}&api_key=5TUqp9G5hAZiuT7QPGfVHdMJ2hntCN6Z&limit=10`;
     fetch(url)
       .then((res) => res.json())
       .then((resJson) => {
         this.setState({
-          data: this.state.data.concat(resJson),
+          data: this.state.data.concat(resJson.data),
           isLoading: false
         })
       })
   }
+  //dataImg.data.item.images.downsized.url
 
   renderRow = ({ item }) => {
     return(
       <View style={styles.item}>
-        <Image source={{uri:item.url}} style={styles.itemImage} />
-        <Text style={styles.itemText}>{item.title}</Text>
-        <Text style={styles.itemText}>{item.id}</Text>
+        <Image source={{uri:item.images.downsized.url}} style={styles.itemImage} />
+        {/* <Text style={styles.itemText}>{item.title}</Text> */}
+        {/* <Text style={styles.itemText}>{item.id}</Text> */}
       </View>
     )
   }
@@ -58,7 +53,7 @@ class Dashboard extends Component {
       page: this.state.page +1,
       isLoading: true
     },
-    this.getData
+    // this.getData
     )
   }
 
@@ -73,7 +68,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log('boy')
     return (
       
       <FlatList
@@ -92,9 +86,6 @@ class Dashboard extends Component {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20
-    // flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center'
   },
   loader: {
     marginTop:10,
@@ -117,8 +108,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-      dataImg : state.show.json
+      query : state.show.info
   }
 }
 
-export default connect(mapStateToProps)(Dashboard)
+export default connect(mapStateToProps)(Search)

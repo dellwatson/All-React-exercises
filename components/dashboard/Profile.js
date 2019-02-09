@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
+import SearchBar from './SearchBar'
 
  class Profile extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-        title: 'ProfileX',
+        title: 'Profile',
         headerLeft: (
             <Ionicons
                 name="md-menu"

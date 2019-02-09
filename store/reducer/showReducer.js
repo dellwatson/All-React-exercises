@@ -1,7 +1,7 @@
 const initState = {
     json :null,
     loading: true,
-    info:null,
+    info:'find',
     error:null,
     errorState:false
 }
