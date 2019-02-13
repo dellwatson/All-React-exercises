@@ -21,5 +21,10 @@
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
   },
-  "private": true
+  "private": true,
+  "name": "rn",
+  "version": "1.0.0",
+  "description": "for experiment",
+  "author": "dale",
+  "license": "MIT"
 }
